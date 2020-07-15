@@ -5,12 +5,12 @@ var sceneryFrames =   [
 ];
 
 var sceneryTimingBackground = {
-  duration: 36000,
+  duration: 6000,
   iterations: Infinity
 };
 
 var sceneryTimingForeground = {
-  duration: 12000,
+  duration: 6000,
   iterations: Infinity
 };
 
@@ -39,9 +39,9 @@ var spriteFrames = [
   { transform: 'translateX(-100%)' }
 ];
 
-var redQueen_alice_sprite = document.getElementById('red-queen_and_alice_sprite');
+var sonic_sprite = document.getElementById('red-queen_and_alice_sprite');
 
-var redQueen_alice = redQueen_alice_sprite.animate(
+var sonic_hedgehog = sonic_sprite.animate(
 spriteFrames, {
   easing: 'steps(11, end)',
   /*direction: "reverse",*/
@@ -56,13 +56,13 @@ spriteFrames, {
 var sceneries = [foreground1Movement, foreground2Movement, background1Movement, background2Movement];
 
 var adjustBackgroundPlayback = function() {
-  if (redQueen_alice.playbackRate < .8) {
+  if (sonic_hedgehog.playbackRate < .8) {
     sceneries.forEach(function(anim) {
-      anim.playbackRate = redQueen_alice.playbackRate/2 * -1;
+      anim.playbackRate = sonic_hedgehog.playbackRate/2 * -1;
     });
-  } else if (redQueen_alice.playbackRate > 1.2) {
+  } else if (sonic_hedgehog.playbackRate > 1.2) {
     sceneries.forEach(function(anim) {
-      anim.playbackRate = redQueen_alice.playbackRate/2;
+      anim.playbackRate = sonic_hedgehog.playbackRate/2;
     });
   } else {
     sceneries.forEach(function(anim) {
@@ -78,18 +78,18 @@ adjustBackgroundPlayback();
 
 setInterval( function() {
 
-  if (redQueen_alice.playbackRate > .4) {
-    redQueen_alice.playbackRate *= .9;
+  if (sonic_hedgehog.playbackRate > .4) {
+    sonic_hedgehog.playbackRate *= .9;
   }
   adjustBackgroundPlayback();
 }, 4000);
 
 
 var goFaster = function() {
-  redQueen_alice.playbackRate *= 1.2;
+  sonic_hedgehog.playbackRate *= 1.2;
   adjustBackgroundPlayback();
 
-  console.log(redQueen_alice.playbackRate);
+  console.log(sonic_hedgehog.playbackRate);
 }
 
 document.addEventListener("click", goFaster);
