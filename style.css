@@ -37,7 +37,7 @@ img {
   top: 55%; left: 20%
 }
 
-#red-queen_and_alice {
+#sonic-hedgehog {
   position: absolute;
   top: 0;
   left: 50%;
@@ -52,13 +52,13 @@ img {
   z-index: 1;
 }
 
-#red-queen_and_alice:before {
+#sonic-hedgehog:before {
     content: " ";
     display: block;
     padding-top: 87%;
 }
 
-#red-queen_and_alice img {
+#sonic-hedgehog img {
   position: absolute;
   left: 0;
   -webkit-transform: translate(-100%, 0);

@@ -8,23 +8,27 @@
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
+
+<audio id="sonicsound" src="images/green-hill-zone.mp3" preload="auto" style="display: none;">
+</audio>
 <div class="wrapper">
+
   <div class="sky"></div>
   <div class="earth">
-    <div id="red-queen_and_alice">
-      <img id="red-queen_and_alice_sprite" src="images/my-sonic-running.png" srcset="images/my-sonic-running.png 2x" alt="Sonic">
+    <div id="sonic-hedgehog">
+      <img id="sonic-abubaker-sprite" src="images/my-sonic-running.png" srcset="images/my-sonic-running.png 2x" alt="Sonic">
     </div>
-    <embed src="green-hill-zone.mp3" hidden="true" autostart="true" loop="true" width="2" height="0">
-      <div style="position:absolute; top:60%; left: 40%">
-        <p>Click to make Sonic run fast and faster. Keep Clicking!!</p>
-      </div>
-      <div style="position:absolute; bottom:20%; left: 30%; color: #fff; z-index: 99999;">
-        Developed by Abubaker Shekhani. Copyright &copy; 2020. <a href="https://github.com/AbubakerShekhani">www.Github.com/AbubakerShekhani</a>
-      </div>
+    <!--  <embed src="images/green-hill-zone.mp3" hidden="true" autostart="true" loop="true" width="2" height="0"> -->
+
+    <div style="position:absolute; top:60%; left: 40%">
+      <p>Click to make Sonic run fast and faster. Keep Clicking!!</p>
+    </div>
+    <div style="position:absolute; bottom:20%; left: 30%; color: #fff; z-index: 99999;">
+      Developed by Abubaker Shekhani. Copyright &copy; 2020. <a target="_blank" href="https://github.com/AbubakerShekhani">www.Github.com/AbubakerShekhani</a>
+    </div>
   </div>
 
-
+  <div style="position: absolute;"><button id="stopsonic">Stop</button></div>
   <div class="scenery" id="foreground1">
   </div>
   <div class="scenery" id="foreground2">
@@ -45,6 +49,13 @@
 <!-- partial -->
   <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/641/web-animations-next.min.js'></script><script  src="./script.js"></script>
 
+  <script>
+    window.onload=function(){
+
+    var sonicsound = document.getElementById("sonicsound");
+    sonicsound.play();
+    }
+    </script>
 </body>
 
 </html>

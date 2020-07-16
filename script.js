@@ -27,6 +27,10 @@ sceneryFrames, sceneryTimingBackground);
 var foreground1 = document.getElementById('foreground1');
 var foreground2 = document.getElementById('foreground2');
 
+var stopsonic = document.getElementById('stopsonic');
+
+
+
 var foreground1Movement = foreground1.animate(
 sceneryFrames, sceneryTimingForeground);
 foreground1Movement.currentTime = foreground1Movement.effect.timing.duration / 2;
@@ -39,13 +43,12 @@ var spriteFrames = [
   { transform: 'translateX(-100%)' }
 ];
 
-var sonic_sprite = document.getElementById('red-queen_and_alice_sprite');
+var sonic_sprite = document.getElementById('sonic-abubaker-sprite');
 
 var sonic_hedgehog = sonic_sprite.animate(
 spriteFrames, {
   easing: 'steps(11, end)',
-  /*direction: "reverse",*/
-  duration: 500,
+  duration: 800,
   playbackRate: 1,
   iterations: Infinity
 });
@@ -82,7 +85,7 @@ setInterval( function() {
     sonic_hedgehog.playbackRate *= .9;
   }
   adjustBackgroundPlayback();
-}, 4000);
+}, 2000);
 
 
 var goFaster = function() {
@@ -94,3 +97,15 @@ var goFaster = function() {
 
 document.addEventListener("click", goFaster);
 document.addEventListener("touchstart", goFaster);
+
+stopsonic.addEventListener("click", function() {
+  sonic_hedgehog.playbackRate = 0;
+
+  sceneries.forEach(function(anim) {
+    anim.playbackRate = 0;
+  });
+
+  var sonicsound = document.getElementById("sonicsound");
+  sonicsound.pause();
+});
+
