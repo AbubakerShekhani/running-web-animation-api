@@ -4,6 +4,8 @@ var sceneryFrames =   [
   { transform: 'translateX(-100%)' }
 ];
 
+let animationStarted = false;
+
 var sceneryTimingBackground = {
   duration: 6000,
   iterations: Infinity
@@ -35,6 +37,8 @@ var foreground1Movement = foreground1.animate(
 sceneryFrames, sceneryTimingForeground);
 foreground1Movement.currentTime = foreground1Movement.effect.timing.duration / 2;
 
+console.log(foreground1Movement);
+
 var foreground2Movement = foreground2.animate(
 sceneryFrames, sceneryTimingForeground);
 
@@ -52,6 +56,8 @@ spriteFrames, {
   playbackRate: 1,
   iterations: Infinity
 });
+
+sonic_hedgehog.playbackRate = 0;
 
 /* Alice tires so easily!
   Every so many seconds, reduce their playback rate so they slow a little.
@@ -76,23 +82,66 @@ var adjustBackgroundPlayback = function() {
 adjustBackgroundPlayback();
 
 
-/* If Alice and the Red Queen are running at a speed of 1, the background doesn't move. */
-/* But if they fall under 1, the background slides backwards */
-
+/*
 setInterval( function() {
 
   if (sonic_hedgehog.playbackRate > .4) {
     sonic_hedgehog.playbackRate *= .9;
   }
   adjustBackgroundPlayback();
-}, 2000);
+}, 5000);
+*/
 
+let audioElem = document.getElementById("sonicsound");
+
+async function playAudio() {
+  try {
+    await audioElem.play();
+
+  } catch(err) {
+
+  }
+}
+
+async function stopAudio() {
+  let sonicsound = document.getElementById("sonicsound");
+  try {
+    console.log("Pausing Audio");
+    await sonicsound.pause();
+    sonicsound.currentTime = 0;
+    sonicsound.src = sonicsound.src;
+
+  } catch(err) {
+    await sonicsound.pause();
+  }
+}
 
 var goFaster = function() {
-  sonic_hedgehog.playbackRate *= 1.2;
-  adjustBackgroundPlayback();
+  let audioElem = document.getElementById("sonicsound");
 
-  console.log(sonic_hedgehog.playbackRate);
+
+  if (audioElem.paused && sonic_hedgehog.playbackRate > 0.1) {
+    playAudio();
+  }
+
+  console.log("goFaster");
+
+  if (animationStarted && sonic_hedgehog.playbackRate === 0)
+  {
+    sonic_hedgehog.playbackRate = 0.5;
+  } else {
+    sonic_hedgehog.playbackRate *= 1.2;
+
+    adjustBackgroundPlayback();
+
+    console.log(sonic_hedgehog.playbackRate);
+
+  }
+
+  animationStarted = true;
+
+
+
 }
 
 document.addEventListener("click", goFaster);
@@ -100,12 +149,15 @@ document.addEventListener("touchstart", goFaster);
 
 stopsonic.addEventListener("click", function() {
   sonic_hedgehog.playbackRate = 0;
+  animationStarted = false;
 
   sceneries.forEach(function(anim) {
     anim.playbackRate = 0;
   });
 
-  var sonicsound = document.getElementById("sonicsound");
-  sonicsound.pause();
+  console.log("Stopping Audio");
+  stopAudio();
+
+
 });
 
